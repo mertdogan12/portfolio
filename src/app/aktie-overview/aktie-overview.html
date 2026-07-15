@@ -1,1 +1,19 @@
-<p>aktie-overview works!</p>
+<section>
+    <h2>Aktienübersicht</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Aktueller Kurs</th>
+                <th>Änderung</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ aktie.name }}</td>
+                <td>{{ aktie.aktuellerKurs }}</td>
+                <td>{{ aktie.aenderung }}</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
