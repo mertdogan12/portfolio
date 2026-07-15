@@ -1,1 +1,20 @@
-<p>aktie-kaufen works!</p>
+<section>
+    <h1>Aktie Kaufen</h1>
+
+    <form [formGroup]="kaufenForm">
+      <label for="aktie">Aktie:</label>
+      <select id="aktie" formControlName="aktie">
+        <option *ngFor="let aktie of demoAktien" [value]="aktie">{{ aktie.name }}</option>
+      </select>
+
+      <label for="hebel">Hebel:</label>
+      <input id="hebel" type="number" formControlName="hebel">
+
+      <label for="hebel_type">Hebel Typ:</label>
+      <select id="hebel_type" formControlName="hebel_type">
+        <option *ngFor="let type of ['Short', 'Long']" [value]="type">{{ type }}</option>
+      </select>
+
+      <button type="submit">Kaufen</button>
+    </form>
+</section>
