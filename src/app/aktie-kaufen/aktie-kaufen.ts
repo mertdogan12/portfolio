@@ -13,7 +13,15 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class AktieKaufen {
 
-  demoAktien: Aktie[] = [];
+  demoAktien: Aktie[] = [
+    {
+      id: 1,
+      name: 'Beispiel Aktie',
+      aktuellerKurs: 100,
+      aenderung: 0.05,
+      beschreibung: 'Dies ist eine Beispielaktie.'
+    }
+  ];
   hebelTypes: string[] = ['Short', 'Long'];
 
   kaufenForm = new FormGroup({
