@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Aktie } from '../aktie';
 
 @Component({
@@ -8,11 +8,5 @@ import { Aktie } from '../aktie';
   styleUrl: './aktie-overview.css',
 })
 export class AktieOverview {
-  aktie: Aktie = {
-    id: 1,
-    name: 'Beispiel Aktie',
-    aktuellerKurs: 100,
-    aenderung: 0.05,
-    beschreibung: 'Dies ist eine Beispielaktie.'
-  };
+  @Input() aktie!: Aktie;
 }
