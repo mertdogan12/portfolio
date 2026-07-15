@@ -1,20 +1,24 @@
 import { Component } from '@angular/core';
 import { Aktie } from '../aktie';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-aktie-kaufen',
-  imports: [],
+  imports: [MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule],
   templateUrl: './aktie-kaufen.html',
   styleUrl: './aktie-kaufen.css',
 })
 export class AktieKaufen {
 
   demoAktien: Aktie[] = [];
+  hebelTypes: string[] = ['Short', 'Long'];
 
-  kaufenForm = {
+  kaufenForm = new FormGroup({
     aktie: new FormControl<Aktie[]>(this.demoAktien),
     hebel: new FormControl(0),
-    hebel_type: new FormControl<string[]>(['Short', 'Long']),
-  }
+    hebel_type: new FormControl<string[]>(this.hebelTypes),
+  });
 }

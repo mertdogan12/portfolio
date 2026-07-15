@@ -2,19 +2,29 @@
     <h1>Aktie Kaufen</h1>
 
     <form [formGroup]="kaufenForm">
-      <label for="aktie">Aktie:</label>
-      <select id="aktie" formControlName="aktie">
-        <option *ngFor="let aktie of demoAktien" [value]="aktie">{{ aktie.name }}</option>
-      </select>
+        <mat-form-field>
+            <mat-label>Aktie</mat-label>
+            <mat-select formControlName="aktie">
+                @for (aktie of demoAktien; track $index) {
+                    <mat-option [value]="aktie">{{ aktie.name }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
 
-      <label for="hebel">Hebel:</label>
-      <input id="hebel" type="number" formControlName="hebel">
+        <mat-form-field>
+            <mat-label>Hebel</mat-label>
+            <input matInput type="number" formControlName="hebel">
+        </mat-form-field>
 
-      <label for="hebel_type">Hebel Typ:</label>
-      <select id="hebel_type" formControlName="hebel_type">
-        <option *ngFor="let type of ['Short', 'Long']" [value]="type">{{ type }}</option>
-      </select>
+        <mat-form-field>
+            <mat-label>Hebel Typ</mat-label>
+            <mat-select formControlName="hebel_type">
+                @for (item of hebelTypes; track $index) {
+                    <mat-option [value]="item">{{ item }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
 
-      <button type="submit">Kaufen</button>
+        <button mat-raised-button type="submit">Kaufen</button>
     </form>
 </section>
