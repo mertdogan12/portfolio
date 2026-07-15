@@ -9,7 +9,7 @@ import { Aktie } from '../aktie';
 })
 export class AktieOverview {
   aktie: Aktie = {
-    id: 1,
+    id: 'BSP',
     name: 'Beispiel Aktie',
     aktuellerKurs: 100,
     aenderung: 0.05,

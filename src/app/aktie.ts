@@ -1,5 +1,5 @@
 export interface Aktie {
-    id: number;
+    id: string;
     name: string;
     aktuellerKurs: number;
     aenderung: number;
