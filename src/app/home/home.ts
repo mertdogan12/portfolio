@@ -1,12 +1,21 @@
 import { Component, inject } from '@angular/core';
+<<<<<<< HEAD
 import { DecimalPipe } from '@angular/common';
+=======
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+>>>>>>> c1ee9e57a1c36ab2565153b91d0e2fed75f12039
 import { AktieOverview } from '../aktie-overview/aktie-overview';
 import { AktienService } from '../aktien-service';
 import { BoughtAktie } from '../bought-aktie';
 
 @Component({
   selector: 'app-home',
+<<<<<<< HEAD
   imports: [DecimalPipe, AktieOverview],
+=======
+  imports: [CommonModule, AktieOverview, RouterLink],
+>>>>>>> c1ee9e57a1c36ab2565153b91d0e2fed75f12039
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

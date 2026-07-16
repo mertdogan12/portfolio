@@ -5,6 +5,7 @@
     padding-bottom: var(--space-4);
 }
 
+<<<<<<< HEAD
 .summary-label {
     font-size: 0.85rem;
     color: var(--mat-sys-on-surface-variant);
@@ -38,4 +39,30 @@
     color: var(--mat-sys-on-surface-variant);
     padding: var(--space-4) 0;
     text-align: center;
+=======
+.kaufen-button {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.kaufen-button .button {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    background-color: #1a8917;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.kaufen-button .button:hover {
+    background-color: #146812;
+}
+
+.aktien-liste {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+>>>>>>> c1ee9e57a1c36ab2565153b91d0e2fed75f12039
 }
