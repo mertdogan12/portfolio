@@ -139,4 +139,12 @@ export class AktienService {
   getAktieByID(id: string): Aktie | undefined {
     return this.demoAktien.find(aktie => aktie.id === id);
   }
+
+  search(query: string): Aktie[] {
+    const lowerQuery = query.toLowerCase();
+    return this.demoAktien.filter(aktie =>
+      aktie.name.toLowerCase().includes(lowerQuery) ||
+      aktie.id.toLowerCase().includes(lowerQuery)
+    );
+  }
 }

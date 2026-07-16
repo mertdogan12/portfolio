@@ -1,0 +1,64 @@
+.aktie-kaufen {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 480px;
+    margin: 24px auto;
+}
+
+.search-field {
+    width: 100%;
+}
+
+.results-card {
+    padding: 0;
+}
+
+.result-item {
+    cursor: pointer;
+}
+
+.kurs-zeile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.kurs {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.aenderung {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+}
+
+.aenderung.positiv {
+    color: #2e7d32;
+}
+
+.aenderung.negativ {
+    color: var(--mat-sys-error);
+}
+
+.beschreibung {
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.kaufen-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 16px;
+}
+
+.kaufen-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}

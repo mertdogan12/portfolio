@@ -1,30 +1,70 @@
-<section>
+<section class="aktie-kaufen">
     <h1>Aktie Kaufen</h1>
 
-    <form [formGroup]="kaufenForm">
-        <mat-form-field>
-            <mat-label>Aktie</mat-label>
-            <mat-select formControlName="aktie">
-                @for (aktie of demoAktien; track $index) {
-                    <mat-option [value]="aktie">{{ aktie.name }}</mat-option>
+    <mat-form-field class="search-field" appearance="outline">
+        <mat-label>Suche nach Aktie</mat-label>
+        <input matInput placeholder="z. B. Apple oder AAPL" #ak (keyup)="search(ak.value)">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    @if (aktien.length > 0) {
+        <mat-card class="results-card">
+            <mat-list>
+                @for (a of aktien; track a.id) {
+                    <mat-list-item class="result-item" (click)="selectAktie(a)">
+                        <mat-icon matListItemIcon>show_chart</mat-icon>
+                        <span matListItemTitle>{{ a.name }}</span>
+                        <span matListItemLine>{{ a.id }} · {{ a.aktuellerKurs | number:'1.2-2' }} €</span>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
                 }
-            </mat-select>
-        </mat-form-field>
+            </mat-list>
+        </mat-card>
+    }
 
-        <mat-form-field>
-            <mat-label>Hebel</mat-label>
-            <input matInput type="number" formControlName="hebel">
-        </mat-form-field>
+    @if (currentAktie) {
+        <mat-card class="aktie-card">
+            <mat-card-header>
+                <mat-card-title>{{ currentAktie.name }}</mat-card-title>
+                <mat-card-subtitle>{{ currentAktie.id }}</mat-card-subtitle>
+            </mat-card-header>
 
-        <mat-form-field>
-            <mat-label>Hebel Typ</mat-label>
-            <mat-select formControlName="hebel_type">
-                @for (item of hebelTypes; track $index) {
-                    <mat-option [value]="item">{{ item }}</mat-option>
-                }
-            </mat-select>
-        </mat-form-field>
+            <mat-card-content>
+                <div class="kurs-zeile">
+                    <span class="kurs">{{ currentAktie.aktuellerKurs | number:'1.2-2' }} €</span>
+                    <span class="aenderung" [class.positiv]="currentAktie.aenderung >= 0"
+                        [class.negativ]="currentAktie.aenderung < 0">
+                        <mat-icon>{{ currentAktie.aenderung >= 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
+                        {{ currentAktie.aenderung | number:'1.2-2' }} %
+                    </span>
+                </div>
+                <p class="beschreibung">{{ currentAktie.beschreibung }}</p>
+            </mat-card-content>
 
-        <button mat-raised-button type="submit">Kaufen</button>
-    </form>
+            <mat-divider></mat-divider>
+
+            <mat-card-content>
+                <form [formGroup]="kaufenForm" class="kaufen-form">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Hebel</mat-label>
+                        <input matInput type="number" formControlName="hebel">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Hebel Typ</mat-label>
+                        <mat-select formControlName="hebel_type">
+                            @for (item of hebelTypes; track $index) {
+                                <mat-option [value]="item">{{ item }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+
+                    <button mat-raised-button color="primary" type="submit" class="kaufen-button">
+                        <mat-icon>shopping_cart</mat-icon>
+                        Kaufen
+                    </button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    }
 </section>
