@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, AsyncPipe } from '@angular/common';
 import { Aktie } from '../aktie';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,14 +12,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { AktienService } from '../aktien-service';
 import { HebelType } from '../hebel-type';
-import { Router, RouterOutlet } from '@angular/router';
-import { Observable } from 'rxjs';
-import { server, servicesVersion } from 'typescript';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-aktie-kaufen',
   imports: [
     DecimalPipe,
+    AsyncPipe,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -38,7 +38,7 @@ export class AktieKaufen {
   private aktienService = inject(AktienService);
 
   aktien: Aktie[] = [];
-  currentAktie: Aktie | null = null;
+  currentAktie$ = new BehaviorSubject<Aktie | null>(null);
   hebelTypes: HebelType[] = Object.values(HebelType);
   hebel: HebelType = HebelType.Long;
 
@@ -58,21 +58,21 @@ export class AktieKaufen {
 
   selectAktie(aktie: Aktie) {
     this.aktienService.quoteAktie(aktie.id).subscribe((aktie) => {
-      this.currentAktie = aktie;
+      this.currentAktie$.next(aktie);
     });
   }
 
   kaufen() {
     const value = this.kaufenForm.value;
+    const currentAktie = this.currentAktie$.value;
 
-    if (this.currentAktie && value.hebel !== null && value.hebel_type) {
+    if (currentAktie && value.hebel !== null && value.hebel_type) {
       const boughtAktie = {
-        id: Date.now(),
-        kaufPreis: this.currentAktie.aktuellerKurs,
+        kaufPreis: currentAktie.aktuellerKurs,
         anzahl: value.anzahl || 0,
         hebel: value.hebel || 0,
         hebelType: this.hebel,
-        aktieId: this.currentAktie.id,
+        aktieId: currentAktie.id,
       };
 
       this.aktienService.kaufenAktie(boughtAktie).subscribe(() =>

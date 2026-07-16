@@ -21,7 +21,7 @@
         </mat-card>
     }
 
-    @if (currentAktie) {
+    @if (currentAktie$ | async; as currentAktie) {
         <mat-card class="aktie-card" appearance="outlined">
             <mat-card-header>
                 <mat-card-title>{{ currentAktie.name }}</mat-card-title>

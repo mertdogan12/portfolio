@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Aktie } from './aktie';
 import { BoughtAktie } from './bought-aktie';
-import { HebelType } from './hebel-type';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -84,49 +83,6 @@ export class AktienService {
     }
   ];
 
-  demoBoughtAktien: BoughtAktie[] = [
-    {
-      id: 1,
-      kaufPreis: 182.10,
-      anzahl: 10,
-      hebel: 1,
-      hebelType: HebelType.Long,
-      aktieId: 'AAPL'
-    },
-    {
-      id: 2,
-      kaufPreis: 405.20,
-      anzahl: 5,
-      hebel: 2,
-      hebelType: HebelType.Long,
-      aktieId: 'MSFT'
-    },
-    {
-      id: 3,
-      kaufPreis: 260.75,
-      anzahl: 8,
-      hebel: 3,
-      hebelType: HebelType.Short,
-      aktieId: 'TSLA'
-    },
-    {
-      id: 4,
-      kaufPreis: 750.40,
-      anzahl: 3,
-      hebel: 2,
-      hebelType: HebelType.Long,
-      aktieId: 'NVDA'
-    },
-    {
-      id: 5,
-      kaufPreis: 195.00,
-      anzahl: 6,
-      hebel: 1,
-      hebelType: HebelType.Long,
-      aktieId: 'SAP'
-    }
-  ];
-
   getBoughtAktien(): Observable<BoughtAktie[]> {
     return this.http.get<BoughtAktie[]>("/bought");
   }
@@ -135,7 +91,7 @@ export class AktienService {
     return this.demoAktien;
   }
 
-  getBoughtAktieById(id: number): Observable<BoughtAktie> {
+  getBoughtAktieById(id: string): Observable<BoughtAktie> {
     return this.http.get<BoughtAktie>(`/bought/${id}`);
   }
 
@@ -155,8 +111,7 @@ export class AktienService {
     return this.http.get<Aktie>(`/api/quote/${aktieId}`);
   }
 
-  kaufenAktie(boughtAktie: BoughtAktie): Observable<BoughtAktie> {
-    console.log("Kaufen Aktie:", boughtAktie);
+  kaufenAktie(boughtAktie: Omit<BoughtAktie, 'id'>): Observable<BoughtAktie> {
     return this.http.post<BoughtAktie>("/bought", boughtAktie);
   }
 }

@@ -29,7 +29,7 @@ export class AktieDetail {
   private aktienService = inject(AktienService);
   private route = inject(ActivatedRoute);
 
-  private id = parseInt(this.route.snapshot.paramMap.get('id') || '0');
+  private id = this.route.snapshot.paramMap.get('id') || '';
 
   boughtAktie$: Observable<BoughtAktie> = this.aktienService.getBoughtAktieById(this.id) ;
 

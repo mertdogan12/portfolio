@@ -1,7 +1,7 @@
 import { HebelType } from "./hebel-type";
 
 export interface BoughtAktie {
-    id: number;
+    id: string;
     kaufPreis: number;
     anzahl: number;
     hebel: number;
