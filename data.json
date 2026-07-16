@@ -1,57 +1,31 @@
 {
   "bought": [
     {
-      "kaufPreis": 327.5,
-      "anzahl": 1,
-      "hebel": 1,
-      "hebelType": "Long",
-      "aktieId": "AAPL",
-      "investiert": 327.5
-    },
-    {
-      "id": "y_yFc5yYZjc",
-      "kaufPreis": 100,
-      "anzahl": 1,
-      "hebel": 1,
-      "hebelType": "Long",
-      "aktieId": "TEST",
-      "investiert": 100
+      "kaufPreis": 394.46,
+      "anzahl": 25.35111291385692,
+      "hebel": 10,
+      "hebelType": "Short",
+      "aktieId": "TSLA",
+      "investiert": 1000,
+      "id": "Z4J-QY2aLh0"
     },
     {
       "kaufPreis": 327.5,
-      "anzahl": 2,
-      "hebel": 2,
-      "hebelType": "Long",
-      "aktieId": "AAPL",
-      "id": "ejBsQDp5p-s",
-      "investiert": 327.5
-    },
-    {
-      "kaufPreis": 212.5,
-      "anzahl": 20,
+      "anzahl": 122.13740458015268,
       "hebel": 20,
       "hebelType": "Long",
-      "aktieId": "NVDA",
-      "id": "rvz-umSXVTY",
-      "investiert": 212.5
+      "aktieId": "AAPL",
+      "investiert": 2000,
+      "id": "kp-2Fbfiluw"
     },
     {
-      "kaufPreis": 394.46,
-      "anzahl": 1,
-      "hebel": 1,
+      "kaufPreis": 370.92,
+      "anzahl": 53.919982745605516,
+      "hebel": 20,
       "hebelType": "Long",
-      "aktieId": "TSLA",
-      "id": "N4tKnjxZF6I",
-      "investiert": 394.46
-    },
-    {
-      "kaufPreis": 395.63,
-      "anzahl": 1.0110456739883225,
-      "hebel": 4,
-      "hebelType": "Long",
-      "aktieId": "MSFT",
-      "investiert": 100,
-      "id": "7cQNzbsxlAY"
+      "aktieId": "GOOGL",
+      "investiert": 1000,
+      "id": "TbUkN511D8E"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
