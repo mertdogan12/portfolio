@@ -124,6 +124,14 @@ export class AktienService {
     }
   ];
 
+  getBoughtAktien(): BoughtAktie[] {
+    return this.demoBoughtAktien;
+  }
+
+  getAktien(): Aktie[] {
+    return this.demoAktien;
+  }
+
   getBoughtAktieById(id: number): BoughtAktie | undefined {
     return this.demoBoughtAktien.find(bought => bought.id === id);
   }

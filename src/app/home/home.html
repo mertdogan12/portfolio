@@ -1,3 +1,5 @@
-<app-aktie-overview *ngFor="let a of aktien" [aktie]="a">
-    
-</app-aktie-overview>
+
+@for (aktie of boughtAktien; track $index) {
+    <p>{{ aktie.kaufPreis }} €</p>
+    <app-aktie-overview [boughtAktie]="aktie"/>
+}
