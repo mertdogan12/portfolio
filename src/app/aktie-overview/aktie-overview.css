@@ -1,0 +1,38 @@
+.karte {
+    display: inline-block;
+    min-width: 200px;
+    margin: 0.5rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.karte h3 {
+    margin: 0 0 0.5rem;
+}
+
+.kurs {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0.25rem 0;
+}
+
+.aenderung {
+    margin: 0.25rem 0;
+    font-weight: 600;
+}
+
+.aenderung.positiv {
+    color: #1a8917;
+}
+
+.aenderung.negativ {
+    color: #c0392b;
+}
+
+.kaufpreis {
+    margin: 0.25rem 0;
+    color: #666;
+}

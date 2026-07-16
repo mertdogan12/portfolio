@@ -1,18 +1,8 @@
-<section>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Aktueller Kurs</th>
-                <th>Änderung</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ aktie.name }}</td>
-                <td>{{ aktie.aktuellerKurs }}</td>
-                <td>{{ aktie.aenderung }}</td>
-            </tr>
-        </tbody>
-    </table>
+<section class="karte">
+    <h3>{{ aktie.name }}</h3>
+    <p class="kurs">{{ aktie.aktuellerKurs }} €</p>
+    <p class="aenderung" [class.positiv]="aktie.aenderung >= 0" [class.negativ]="aktie.aenderung < 0">
+        {{ aktie.aenderung >= 0 ? '+' : '' }}{{ aktie.aenderung }} %
+    </p>
+    <p class="kaufpreis">Kaufpreis: {{ boughtAktie.kaufPreis }} €</p>
 </section>

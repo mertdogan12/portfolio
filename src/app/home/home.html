@@ -1,6 +1,7 @@
 
 <h1>Deine Aktienübersicht</h1>
-@for (aktie of boughtAktien; track $index) {
-    <p>{{ aktie.kaufPreis }} €</p>
-    <app-aktie-overview [boughtAktie]="aktie"/>
-}
+<div class="aktien-liste">
+    @for (aktie of boughtAktien; track $index) {
+        <app-aktie-overview [boughtAktie]="aktie"/>
+    }
+</div>
