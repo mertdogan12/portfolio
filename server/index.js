@@ -7,7 +7,7 @@ const yahoo = new YahooFinance({ suppressNotices: ['yahooSurvey'] });
 const app = express();
 app.use(cors());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3333;
 
 app.get('/api/quote/:id', async (req, res) => {
   try {

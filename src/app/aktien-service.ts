@@ -155,4 +155,8 @@ export class AktienService {
     return this.http.get<Aktie>(`/api/quote/${aktieId}`);
   }
 
+  kaufenAktie(boughtAktie: BoughtAktie): Observable<BoughtAktie> {
+    console.log("Kaufen Aktie:", boughtAktie);
+    return this.http.post<BoughtAktie>("/bought", boughtAktie);
+  }
 }
