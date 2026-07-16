@@ -14,12 +14,18 @@ import { BoughtAktie } from '../bought-aktie';
 export class Home {
   private aktienService = inject(AktienService);
 
-  boughtAktien$: Observable<BoughtAktie[]> = this.aktienService.getBoughtAktien();
+  boughtAktien$: Observable<BoughtAktie[]> = of([]);
   totalInvested = 0;
 
   totalValue$: Observable<number> = of(0);
 
   constructor() {
+    this.reload();
+  }
+
+  reload(): void {
+    this.totalInvested = 0;
+    this.boughtAktien$ = this.aktienService.getBoughtAktien();
 
     this.boughtAktien$.subscribe(boughtAktien => {
       for (const bought of boughtAktien) {

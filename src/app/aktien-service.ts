@@ -132,4 +132,7 @@ export class AktienService {
       ? (this.berechneGewinn(boughtAktie, aktuellerKurs) / boughtAktie.investiert) * 100
       : 0;
   }
+  verkaufenAktie(id: string): Observable<BoughtAktie> {
+    return this.http.delete<BoughtAktie>(`/bought/${id}`);
+  }
 }

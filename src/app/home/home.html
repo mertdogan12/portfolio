@@ -13,7 +13,7 @@
     @if (boughtAktien$ | async; as boughtAktien) {
         <section class="positions">
             @for (aktie of boughtAktien; track aktie.id) {
-                <app-aktie-overview [boughtAktie]="aktie" />
+                <app-aktie-overview [boughtAktie]="aktie" (verkauft)="reload()" />
             } @empty {
                 <p class="empty-state">Noch keine Aktien gekauft.</p>
             }

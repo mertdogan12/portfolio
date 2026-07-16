@@ -1,6 +1,7 @@
 @if (aktie$ | async; as aktie) {
-    <a class="position-row" [routerLink]="['/aktie', boughtAktie.id]">
-        <div class="position-avatar">{{ aktie.name.charAt(0) }}</div>
+    <div class="position-row">
+        <a class="position-link" [routerLink]="['/aktie', boughtAktie.id]">
+            <div class="position-avatar">{{ aktie.name.charAt(0) }}</div>
 
         <div class="position-main">
             <span class="position-name">{{ aktie.name }}</span>
@@ -17,4 +18,21 @@
             </span>
         </div>
     </a>
+            <div class="position-main">
+                <span class="position-name">{{ aktie.name }}</span>
+                <span class="position-meta">{{ boughtAktie.anzahl }} Stk. · Ø {{ boughtAktie.kaufPreis | number:'1.2-2' }} €</span>
+            </div>
+
+            <div class="position-values">
+                <span class="position-kurs">{{ aktie.aktuellerKurs | number:'1.2-2' }} €</span>
+                <span class="position-aenderung" [class.positiv]="aktie.aenderung >= 0" [class.negativ]="aktie.aenderung < 0">
+                    {{ aktie.aenderung >= 0 ? '+' : '' }}{{ aktie.aenderung | number:'1.2-2' }} %
+                </span>
+            </div>
+        
+
+        <button mat-icon-button class="sell-button" aria-label="Verkaufen" (click)="verkaufen($event)">
+            <mat-icon>sell</mat-icon>
+        </button>
+    </div>
 }

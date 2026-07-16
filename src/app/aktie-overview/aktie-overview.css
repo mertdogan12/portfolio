@@ -1,14 +1,27 @@
 .position-row {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-3) 0;
+    gap: var(--space-2);
     border-bottom: 1px solid var(--mat-sys-outline-variant);
-    cursor: pointer;
 }
 
 .position-row:hover {
     background-color: var(--mat-sys-surface-container-low);
+}
+
+.position-link {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    gap: var(--space-3);
+    padding: var(--space-3) 0;
+    cursor: pointer;
+}
+
+.sell-button {
+    flex-shrink: 0;
+    color: var(--mat-sys-on-surface-variant);
 }
 
 .position-avatar {
