@@ -14,7 +14,6 @@
                     <mat-list-item class="result-item" (click)="selectAktie(a)">
                         <mat-icon matListItemIcon>show_chart</mat-icon>
                         <span matListItemTitle>{{ a.name }}</span>
-                        <span matListItemLine>{{ a.id }} · {{ a.aktuellerKurs | number:'1.2-2' }} €</span>
                     </mat-list-item>
                     <mat-divider></mat-divider>
                 }
@@ -22,7 +21,7 @@
         </mat-card>
     }
 
-    @if (currentAktie$ | async; as currentAktie) {
+    @if (currentAktie) {
         <mat-card class="aktie-card" appearance="outlined">
             <mat-card-header>
                 <mat-card-title>{{ currentAktie.name }}</mat-card-title>
