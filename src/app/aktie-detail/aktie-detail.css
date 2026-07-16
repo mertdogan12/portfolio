@@ -1,0 +1,48 @@
+.aktie-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 480px;
+    margin: 24px auto;
+}
+
+.kurs-zeile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.kurs {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.aenderung {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+}
+
+.aenderung.positiv {
+    color: #2e7d32;
+}
+
+.aenderung.negativ {
+    color: var(--mat-sys-error);
+}
+
+.beschreibung {
+    color: var(--mat-sys-on-surface-variant);
+}
+
+mat-chip.long {
+    --mat-chip-elevated-container-color: #2e7d32;
+    --mat-chip-label-text-color: white;
+}
+
+mat-chip.short {
+    --mat-chip-elevated-container-color: var(--mat-sys-error);
+    --mat-chip-label-text-color: white;
+}
