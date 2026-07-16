@@ -8,7 +8,6 @@
         </span>
     </section>
 
-<<<<<<< HEAD
     <section class="positions">
         @for (aktie of boughtAktien; track aktie.id) {
             <app-aktie-overview [boughtAktie]="aktie" />
@@ -16,14 +15,4 @@
             <p class="empty-state">Noch keine Aktien gekauft.</p>
         }
     </section>
-=======
-<h1>Deine Aktienübersicht</h1>
-<div class="kaufen-button">
-    <a routerLink="/kaufen" class="button">Aktie kaufen</a>
-</div>
-<div class="aktien-liste">
-    @for (aktie of boughtAktien; track $index) {
-        <app-aktie-overview [boughtAktie]="aktie"/>
-    }
->>>>>>> c1ee9e57a1c36ab2565153b91d0e2fed75f12039
 </div>
