@@ -1,38 +1,69 @@
-.karte {
-    display: inline-block;
-    min-width: 200px;
-    margin: 0.5rem;
-    padding: 1rem 1.25rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    text-align: center;
+.position-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
+    cursor: pointer;
 }
 
-.karte h3 {
-    margin: 0 0 0.5rem;
+.position-row:hover {
+    background-color: var(--mat-sys-surface-container-low);
 }
 
-.kurs {
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin: 0.25rem 0;
+.position-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--mat-sys-surface-container-high);
+    color: var(--mat-sys-primary);
+    font-weight: 700;
+    flex-shrink: 0;
 }
 
-.aenderung {
-    margin: 0.25rem 0;
+.position-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.position-name {
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.position-meta {
+    font-size: 0.8rem;
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.position-values {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.position-kurs {
     font-weight: 600;
 }
 
-.aenderung.positiv {
-    color: #1a8917;
+.position-aenderung {
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
-.aenderung.negativ {
-    color: #c0392b;
+.position-aenderung.positiv {
+    color: var(--color-positive);
 }
 
-.kaufpreis {
-    margin: 0.25rem 0;
-    color: #666;
+.position-aenderung.negativ {
+    color: var(--color-negative);
 }

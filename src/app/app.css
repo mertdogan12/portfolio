@@ -1,0 +1,41 @@
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+  background-color: var(--mat-sys-surface);
+}
+
+.logo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--mat-sys-on-surface);
+}
+
+.app-nav {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.app-nav a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--mat-sys-on-surface-variant);
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.app-nav a:hover {
+  color: var(--mat-sys-on-surface);
+}
+
+.app-nav a.active {
+  color: var(--mat-sys-primary);
+  border-bottom-color: var(--mat-sys-primary);
+}

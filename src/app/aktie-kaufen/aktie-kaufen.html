@@ -1,4 +1,4 @@
-<section class="aktie-kaufen">
+<div class="page aktie-kaufen">
     <h1>Aktie Kaufen</h1>
 
     <mat-form-field class="search-field" appearance="outline">
@@ -8,7 +8,7 @@
     </mat-form-field>
 
     @if (aktien.length > 0) {
-        <mat-card class="results-card">
+        <mat-card class="results-card" appearance="outlined">
             <mat-list>
                 @for (a of aktien; track a.id) {
                     <mat-list-item class="result-item" (click)="selectAktie(a)">
@@ -23,7 +23,7 @@
     }
 
     @if (currentAktie) {
-        <mat-card class="aktie-card">
+        <mat-card class="aktie-card" appearance="outlined">
             <mat-card-header>
                 <mat-card-title>{{ currentAktie.name }}</mat-card-title>
                 <mat-card-subtitle>{{ currentAktie.id }}</mat-card-subtitle>
@@ -67,4 +67,4 @@
             </mat-card-content>
         </mat-card>
     }
-</section>
+</div>

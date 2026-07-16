@@ -1,9 +1,41 @@
-h1 {
-    text-align: center;
+.portfolio-summary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-bottom: var(--space-4);
 }
 
-.aktien-liste {
+.summary-label {
+    font-size: 0.85rem;
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.summary-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.summary-change {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.summary-change.positiv {
+    color: var(--color-positive);
+}
+
+.summary-change.negativ {
+    color: var(--color-negative);
+}
+
+.positions {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+}
+
+.empty-state {
+    color: var(--mat-sys-on-surface-variant);
+    padding: var(--space-4) 0;
+    text-align: center;
 }

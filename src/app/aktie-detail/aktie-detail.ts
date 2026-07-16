@@ -9,7 +9,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-aktie-detail',
@@ -19,7 +18,6 @@ import { MatChipsModule } from '@angular/material/chips';
     MatListModule,
     MatIconModule,
     MatDividerModule,
-    MatChipsModule,
   ],
   templateUrl: './aktie-detail.html',
   styleUrl: './aktie-detail.css',

@@ -1,5 +1,5 @@
-<section class="aktie-detail">
-    <mat-card class="aktie-card">
+<div class="page aktie-detail">
+    <mat-card class="aktie-card" appearance="outlined">
         <mat-card-header>
             <mat-card-title>{{ aktie.name }}</mat-card-title>
             <mat-card-subtitle>{{ aktie.id }}</mat-card-subtitle>
@@ -18,7 +18,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="bought-card">
+    <mat-card class="bought-card" appearance="outlined">
         <mat-card-header>
             <mat-card-title>Meine Position</mat-card-title>
             <mat-card-subtitle>Kauf #{{ boughtAktie.id }} · {{ boughtAktie.aktieId }}</mat-card-subtitle>
@@ -53,16 +53,12 @@
                 <mat-list-item>
                     <mat-icon matListItemIcon>swap_vert</mat-icon>
                     <span matListItemTitle>Hebel-Typ</span>
-                    <span matListItemLine>
-                        <mat-chip-set>
-                            <mat-chip [class.long]="boughtAktie.hebelType === 'Long'"
-                                [class.short]="boughtAktie.hebelType === 'Short'">
-                                {{ boughtAktie.hebelType }}
-                            </mat-chip>
-                        </mat-chip-set>
+                    <span matListItemLine class="hebel-typ" [class.long]="boughtAktie.hebelType === 'Long'"
+                        [class.short]="boughtAktie.hebelType === 'Short'">
+                        {{ boughtAktie.hebelType }}
                     </span>
                 </mat-list-item>
             </mat-list>
         </mat-card-content>
     </mat-card>
-</section>
+</div>

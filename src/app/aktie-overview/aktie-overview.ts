@@ -1,11 +1,13 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { Aktie } from '../aktie';
 import { BoughtAktie } from '../bought-aktie';
 import { AktienService } from '../aktien-service';
 
 @Component({
   selector: 'app-aktie-overview',
-  imports: [],
+  imports: [DecimalPipe, RouterLink],
   templateUrl: './aktie-overview.html',
   styleUrl: './aktie-overview.css',
 })

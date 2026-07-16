@@ -1,9 +1,7 @@
 .aktie-detail {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    max-width: 480px;
-    margin: 24px auto;
+    gap: var(--space-3);
 }
 
 .kurs-zeile {
@@ -14,35 +12,45 @@
 }
 
 .kurs {
-    font-size: 1.5rem;
-    font-weight: 500;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .aenderung {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .aenderung.positiv {
-    color: #2e7d32;
+    color: var(--color-positive);
 }
 
 .aenderung.negativ {
-    color: var(--mat-sys-error);
+    color: var(--color-negative);
 }
 
 .beschreibung {
     color: var(--mat-sys-on-surface-variant);
 }
 
-mat-chip.long {
-    --mat-chip-elevated-container-color: #2e7d32;
-    --mat-chip-label-text-color: white;
+.hebel-typ {
+    display: inline-flex;
+    width: fit-content;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
 }
 
-mat-chip.short {
-    --mat-chip-elevated-container-color: var(--mat-sys-error);
-    --mat-chip-label-text-color: white;
+.hebel-typ.long {
+    color: var(--color-positive);
+    background-color: color-mix(in srgb, var(--color-positive) 16%, transparent);
+}
+
+.hebel-typ.short {
+    color: var(--color-negative);
+    background-color: color-mix(in srgb, var(--color-negative) 16%, transparent);
 }

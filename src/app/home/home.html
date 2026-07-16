@@ -1,7 +1,18 @@
+<div class="page">
+    <section class="portfolio-summary">
+        <span class="summary-label">Portfolio</span>
+        <h1 class="summary-value">{{ totalValue | number:'1.2-2' }} €</h1>
+        <span class="summary-change" [class.positiv]="totalChangeAbs >= 0" [class.negativ]="totalChangeAbs < 0">
+            {{ totalChangeAbs >= 0 ? '+' : '' }}{{ totalChangeAbs | number:'1.2-2' }} €
+            ({{ totalChangePct >= 0 ? '+' : '' }}{{ totalChangePct | number:'1.2-2' }} %)
+        </span>
+    </section>
 
-<h1>Deine Aktienübersicht</h1>
-<div class="aktien-liste">
-    @for (aktie of boughtAktien; track $index) {
-        <app-aktie-overview [boughtAktie]="aktie"/>
-    }
+    <section class="positions">
+        @for (aktie of boughtAktien; track aktie.id) {
+            <app-aktie-overview [boughtAktie]="aktie" />
+        } @empty {
+            <p class="empty-state">Noch keine Aktien gekauft.</p>
+        }
+    </section>
 </div>

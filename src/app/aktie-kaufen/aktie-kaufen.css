@@ -1,9 +1,7 @@
 .aktie-kaufen {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    max-width: 480px;
-    margin: 24px auto;
+    gap: var(--space-3);
 }
 
 .search-field {
@@ -26,23 +24,24 @@
 }
 
 .kurs {
-    font-size: 1.5rem;
-    font-weight: 500;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .aenderung {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .aenderung.positiv {
-    color: #2e7d32;
+    color: var(--color-positive);
 }
 
 .aenderung.negativ {
-    color: var(--mat-sys-error);
+    color: var(--color-negative);
 }
 
 .beschreibung {

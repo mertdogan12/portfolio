@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Shared gain/loss colors, used across all components instead of ad-hoc hex values */
+  --color-positive: #00d17a;
+  --color-negative: #ff4d5e;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+
+  --content-max-width: 560px;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-3) var(--space-5);
+}
