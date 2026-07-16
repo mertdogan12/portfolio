@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
+import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { Aktie } from '../aktie';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,12 +12,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { AktienService } from '../aktien-service';
 import { HebelType } from '../hebel-type';
+<<<<<<< HEAD
 import { Router, RouterOutlet } from '@angular/router';
+=======
+import { map, Observable } from 'rxjs';
+>>>>>>> f579898e36a0888cf0492584f0775ddeb0b75f73
 
 @Component({
   selector: 'app-aktie-kaufen',
   imports: [
     DecimalPipe,
+    AsyncPipe,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -36,13 +41,17 @@ export class AktieKaufen {
   private aktienService = inject(AktienService);
 
   aktien: Aktie[] = [];
-  currentAktie: Aktie | null = null;
+  currentAktie$: Observable<Aktie> | null = null;
   hebelTypes: HebelType[] = Object.values(HebelType);
   hebel: HebelType = HebelType.Long;
 
   kaufenForm = new FormGroup({
+<<<<<<< HEAD
     aktie: new FormControl<Aktie | null>(this.currentAktie),
     anzahl: new FormControl(1),
+=======
+    aktie: new FormControl<Aktie | null>(null),
+>>>>>>> f579898e36a0888cf0492584f0775ddeb0b75f73
     hebel: new FormControl(0),
     hebel_type: new FormControl<string[]>(Object.values(HebelType)),
   });
@@ -55,7 +64,9 @@ export class AktieKaufen {
   }
 
   selectAktie(aktie: Aktie) {
-    this.currentAktie = aktie;
+    this.currentAktie$ = this.aktienService.quoteAktie(aktie.id).pipe(
+      map(live => ({ ...live, beschreibung: live.beschreibung || aktie.beschreibung }))
+    );
   }
 
   kaufen() {

@@ -1,12 +1,14 @@
 <div class="page">
-    <section class="portfolio-summary">
-        <span class="summary-label">Portfolio</span>
-        <h1 class="summary-value">{{ totalValue | number:'1.2-2' }} €</h1>
-        <span class="summary-change" [class.positiv]="totalChangeAbs >= 0" [class.negativ]="totalChangeAbs < 0">
-            {{ totalChangeAbs >= 0 ? '+' : '' }}{{ totalChangeAbs | number:'1.2-2' }} €
-            ({{ totalChangePct >= 0 ? '+' : '' }}{{ totalChangePct | number:'1.2-2' }} %)
-        </span>
-    </section>
+    @if (totalValue$ | async; as totalValue) {
+        <section class="portfolio-summary">
+            <span class="summary-label">Portfolio</span>
+            <h1 class="summary-value">{{ totalValue | number:'1.2-2' }} €</h1>
+            <span class="summary-change" [class.positiv]="totalChangeAbs(totalValue) >= 0" [class.negativ]="totalChangeAbs(totalValue) < 0">
+                {{ totalChangeAbs(totalValue) >= 0 ? '+' : '' }}{{ totalChangeAbs(totalValue) | number:'1.2-2' }} €
+                ({{ totalChangePct(totalValue) >= 0 ? '+' : '' }}{{ totalChangePct(totalValue) | number:'1.2-2' }} %)
+            </span>
+        </section>
+    }
 
     <section class="positions">
         @for (aktie of boughtAktien; track aktie.id) {
