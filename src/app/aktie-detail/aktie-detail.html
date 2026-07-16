@@ -1,22 +1,24 @@
 <div class="page aktie-detail">
-    <mat-card class="aktie-card" appearance="outlined">
-        <mat-card-header>
-            <mat-card-title>{{ aktie.name }}</mat-card-title>
-            <mat-card-subtitle>{{ aktie.id }}</mat-card-subtitle>
-        </mat-card-header>
+    @if (aktie$ | async; as aktie) {
+        <mat-card class="aktie-card" appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>{{ aktie.name }}</mat-card-title>
+                <mat-card-subtitle>{{ aktie.id }}</mat-card-subtitle>
+            </mat-card-header>
 
-        <mat-card-content>
-            <div class="kurs-zeile">
-                <span class="kurs">{{ aktie.aktuellerKurs | number:'1.2-2' }} €</span>
-                <span class="aenderung" [class.positiv]="aktie.aenderung >= 0" [class.negativ]="aktie.aenderung < 0">
-                    <mat-icon>{{ aktie.aenderung >= 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
-                    {{ aktie.aenderung | number:'1.2-2' }} %
-                </span>
-            </div>
+            <mat-card-content>
+                <div class="kurs-zeile">
+                    <span class="kurs">{{ aktie.aktuellerKurs | number:'1.2-2' }} €</span>
+                    <span class="aenderung" [class.positiv]="aktie.aenderung >= 0" [class.negativ]="aktie.aenderung < 0">
+                        <mat-icon>{{ aktie.aenderung >= 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
+                        {{ aktie.aenderung | number:'1.2-2' }} %
+                    </span>
+                </div>
 
-            <p class="beschreibung">{{ aktie.beschreibung }}</p>
-        </mat-card-content>
-    </mat-card>
+                <p class="beschreibung">{{ aktie.beschreibung }}</p>
+            </mat-card-content>
+        </mat-card>
+    }
 
     <mat-card class="bought-card" appearance="outlined">
         <mat-card-header>

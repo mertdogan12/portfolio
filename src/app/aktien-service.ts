@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Aktie } from './aktie';
 import { BoughtAktie } from './bought-aktie';
 import { HebelType } from './hebel-type';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AktienService {
+  private http = inject(HttpClient);
 
   demoAktien: Aktie[] = [
     {
@@ -147,4 +150,9 @@ export class AktienService {
       aktie.id.toLowerCase().includes(lowerQuery)
     );
   }
+
+  quoteAktie(aktieId: string): Observable<Aktie> {
+    return this.http.get<Aktie>(`/api/quote/${aktieId}`);
+  }
+
 }
