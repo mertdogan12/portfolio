@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { AktieOverview } from '../aktie-overview/aktie-overview';
 import { Aktie } from '../aktie';
 import { AktienService } from '../aktien-service';
@@ -7,7 +8,7 @@ import { BoughtAktie } from '../bought-aktie';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, AktieOverview],
+  imports: [CommonModule, AktieOverview, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

@@ -1,5 +1,8 @@
 
 <h1>Deine Aktienübersicht</h1>
+<div class="kaufen-button">
+    <a routerLink="/kaufen" class="button">Aktie kaufen</a>
+</div>
 <div class="aktien-liste">
     @for (aktie of boughtAktien; track $index) {
         <app-aktie-overview [boughtAktie]="aktie"/>
