@@ -114,4 +114,8 @@ export class AktienService {
   kaufenAktie(boughtAktie: Omit<BoughtAktie, 'id'>): Observable<BoughtAktie> {
     return this.http.post<BoughtAktie>("/bought", boughtAktie);
   }
+
+  verkaufenAktie(id: string): Observable<BoughtAktie> {
+    return this.http.delete<BoughtAktie>(`/bought/${id}`);
+  }
 }

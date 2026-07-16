@@ -1,36 +1,12 @@
 {
   "bought": [
     {
-      "id": "VRMoBOhqvhU",
       "kaufPreis": 327.5,
       "anzahl": 1,
-      "hebel": 0,
-      "hebelType": "Long",
-      "aktieId": "AAPL"
-    },
-    {
-      "id": "y_yFc5yYZjc",
-      "kaufPreis": 100,
-      "anzahl": 1,
-      "hebel": 1,
-      "hebelType": "Long",
-      "aktieId": "TEST"
-    },
-    {
-      "kaufPreis": 327.5,
-      "anzahl": 1,
-      "hebel": 2,
+      "hebel": 10,
       "hebelType": "Long",
       "aktieId": "AAPL",
-      "id": "ejBsQDp5p-s"
-    },
-    {
-      "kaufPreis": 212.5,
-      "anzahl": 1,
-      "hebel": 20,
-      "hebelType": "Long",
-      "aktieId": "NVDA",
-      "id": "rvz-umSXVTY"
+      "id": "aUpIuYhRNpg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
