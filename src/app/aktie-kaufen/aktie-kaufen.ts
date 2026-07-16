@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
+import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { Aktie } from '../aktie';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,11 +12,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { AktienService } from '../aktien-service';
 import { HebelType } from '../hebel-type';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-aktie-kaufen',
   imports: [
     DecimalPipe,
+    AsyncPipe,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -33,11 +35,11 @@ import { HebelType } from '../hebel-type';
 export class AktieKaufen {
   aktienService = inject(AktienService);
   aktien: Aktie[] = [];
-  currentAktie: Aktie | null = null;
+  currentAktie$: Observable<Aktie> | null = null;
   hebelTypes: HebelType[] = Object.values(HebelType);
 
   kaufenForm = new FormGroup({
-    aktie: new FormControl<Aktie | null>(this.currentAktie),
+    aktie: new FormControl<Aktie | null>(null),
     hebel: new FormControl(0),
     hebel_type: new FormControl<string[]>(Object.values(HebelType)),
   });
@@ -50,6 +52,8 @@ export class AktieKaufen {
   }
 
   selectAktie(aktie: Aktie) {
-    this.currentAktie = aktie;
+    this.currentAktie$ = this.aktienService.quoteAktie(aktie.id).pipe(
+      map(live => ({ ...live, beschreibung: live.beschreibung || aktie.beschreibung }))
+    );
   }
 }
