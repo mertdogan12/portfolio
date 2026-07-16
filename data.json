@@ -1,4 +1,21 @@
 {
-  "bought": [],
+  "bought": [
+    {
+      "id": "WJ90VyAiiOg",
+      "kaufPreis": 327.5,
+      "anzahl": 1,
+      "hebel": 10,
+      "hebelType": "Long",
+      "aktieId": "AAPL"
+    },
+    {
+      "id": "5QeaejuHMGg",
+      "kaufPreis": 394.46,
+      "anzahl": 1,
+      "hebel": 4,
+      "hebelType": "Long",
+      "aktieId": "TSLA"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

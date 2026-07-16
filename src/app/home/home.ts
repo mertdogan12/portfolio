@@ -12,29 +12,30 @@ import { BoughtAktie } from '../bought-aktie';
   styleUrl: './home.css',
 })
 export class Home {
-  boughtAktien: BoughtAktie[] = [];
-  totalInvested = 0;
-
   private aktienService = inject(AktienService);
 
-  totalValue$: Observable<number>;
+  boughtAktien$: Observable<BoughtAktie[]> = this.aktienService.getBoughtAktien();
+  totalInvested = 0;
+
+  totalValue$: Observable<number> = of(0);
 
   constructor() {
-    this.boughtAktien = this.aktienService.getBoughtAktien();
 
-    for (const bought of this.boughtAktien) {
-      this.totalInvested += bought.kaufPreis * bought.anzahl;
-    }
+    this.boughtAktien$.subscribe(boughtAktien => {
+      for (const bought of boughtAktien) {
+        this.totalInvested += bought.kaufPreis * bought.anzahl;
+      }
 
-    this.totalValue$ = this.boughtAktien.length
-      ? forkJoin(
-          this.boughtAktien.map(bought =>
-            this.aktienService.quoteAktie(bought.aktieId).pipe(
-              map(aktie => aktie.aktuellerKurs * bought.anzahl)
+      this.totalValue$ = boughtAktien.length
+        ? forkJoin(
+            boughtAktien.map(bought =>
+              this.aktienService.quoteAktie(bought.aktieId).pipe(
+                map(aktie => aktie.aktuellerKurs * bought.anzahl)
+              )
             )
-          )
-        ).pipe(map(werte => werte.reduce((summe, wert) => summe + wert, 0)))
-      : of(0);
+          ).pipe(map(werte => werte.reduce((summe, wert) => summe + wert, 0)))
+        : of(0);
+    });
   }
 
   totalChangeAbs(totalValue: number): number {

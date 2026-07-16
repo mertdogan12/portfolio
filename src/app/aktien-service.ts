@@ -127,16 +127,16 @@ export class AktienService {
     }
   ];
 
-  getBoughtAktien(): BoughtAktie[] {
-    return this.demoBoughtAktien;
+  getBoughtAktien(): Observable<BoughtAktie[]> {
+    return this.http.get<BoughtAktie[]>("/bought");
   }
 
   getAktien(): Aktie[] {
     return this.demoAktien;
   }
 
-  getBoughtAktieById(id: number): BoughtAktie | undefined {
-    return this.demoBoughtAktien.find(bought => bought.id === id);
+  getBoughtAktieById(id: number): Observable<BoughtAktie> {
+    return this.http.get<BoughtAktie>(`/bought/${id}`);
   }
 
   getAktieByID(id: string): Aktie | undefined {

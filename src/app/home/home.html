@@ -10,11 +10,13 @@
         </section>
     }
 
-    <section class="positions">
-        @for (aktie of boughtAktien; track aktie.id) {
-            <app-aktie-overview [boughtAktie]="aktie" />
-        } @empty {
-            <p class="empty-state">Noch keine Aktien gekauft.</p>
-        }
-    </section>
+    @if (boughtAktien$ | async; as boughtAktien) {
+        <section class="positions">
+            @for (aktie of boughtAktien; track aktie.id) {
+                <app-aktie-overview [boughtAktie]="aktie" />
+            } @empty {
+                <p class="empty-state">Noch keine Aktien gekauft.</p>
+            }
+        </section>
+    }
 </div>

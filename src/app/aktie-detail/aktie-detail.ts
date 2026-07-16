@@ -9,7 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-aktie-detail',
@@ -31,11 +31,9 @@ export class AktieDetail {
 
   private id = parseInt(this.route.snapshot.paramMap.get('id') || '0');
 
-  boughtAktie: BoughtAktie = this.aktienService.getBoughtAktieById(
-    this.id
-  ) 
-    || { id: 0, kaufPreis: 0, anzahl: 0, hebel: 0, hebelType: HebelType.Long, aktieId: '' };
+  boughtAktie$: Observable<BoughtAktie> = this.aktienService.getBoughtAktieById(this.id) ;
 
-
-  aktie$: Observable<Aktie | null> = this.aktienService.quoteAktie(this.boughtAktie.aktieId);
+  aktie$: Observable<Observable<Aktie>> = this.boughtAktie$.pipe(
+    map(boughtAktie => this.aktienService.quoteAktie(boughtAktie.aktieId))
+  );
 }

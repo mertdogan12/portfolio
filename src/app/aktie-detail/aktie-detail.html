@@ -1,66 +1,70 @@
 <div class="page aktie-detail">
     @if (aktie$ | async; as aktie) {
-        <mat-card class="aktie-card" appearance="outlined">
+        @if (aktie | async; as ak) {
+            <mat-card class="aktie-card" appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title>{{ ak.name }}</mat-card-title>
+                    <mat-card-subtitle>{{ ak.id }}</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <div class="kurs-zeile">
+                        <span class="kurs">{{ ak.aktuellerKurs | number:'1.2-2' }} €</span>
+                        <span class="aenderung" [class.positiv]="ak.aenderung >= 0" [class.negativ]="ak.aenderung < 0">
+                            <mat-icon>{{ ak.aenderung >= 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
+                            {{ ak.aenderung | number:'1.2-2' }} %
+                        </span>
+                    </div>
+
+                    <p class="beschreibung">{{ ak.beschreibung }}</p>
+                </mat-card-content>
+            </mat-card>
+        }
+    }
+
+    @if (boughtAktie$ | async; as boughtAktie) {
+        <mat-card class="bought-card" appearance="outlined">
             <mat-card-header>
-                <mat-card-title>{{ aktie.name }}</mat-card-title>
-                <mat-card-subtitle>{{ aktie.id }}</mat-card-subtitle>
+                <mat-card-title>Meine Position</mat-card-title>
+                <mat-card-subtitle>Kauf #{{ boughtAktie.id }} · {{ boughtAktie.aktieId }}</mat-card-subtitle>
             </mat-card-header>
 
             <mat-card-content>
-                <div class="kurs-zeile">
-                    <span class="kurs">{{ aktie.aktuellerKurs | number:'1.2-2' }} €</span>
-                    <span class="aenderung" [class.positiv]="aktie.aenderung >= 0" [class.negativ]="aktie.aenderung < 0">
-                        <mat-icon>{{ aktie.aenderung >= 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
-                        {{ aktie.aenderung | number:'1.2-2' }} %
-                    </span>
-                </div>
+                <mat-list>
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>payments</mat-icon>
+                        <span matListItemTitle>Kaufpreis</span>
+                        <span matListItemLine>{{ boughtAktie.kaufPreis | number:'1.2-2' }} €</span>
+                    </mat-list-item>
 
-                <p class="beschreibung">{{ aktie.beschreibung }}</p>
+                    <mat-divider></mat-divider>
+
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>inventory_2</mat-icon>
+                        <span matListItemTitle>Anzahl</span>
+                        <span matListItemLine>{{ boughtAktie.anzahl }} Stück</span>
+                    </mat-list-item>
+
+                    <mat-divider></mat-divider>
+
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>speed</mat-icon>
+                        <span matListItemTitle>Hebel</span>
+                        <span matListItemLine>{{ boughtAktie.hebel }}x</span>
+                    </mat-list-item>
+
+                    <mat-divider></mat-divider>
+
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>swap_vert</mat-icon>
+                        <span matListItemTitle>Hebel-Typ</span>
+                        <span matListItemLine class="hebel-typ" [class.long]="boughtAktie.hebelType === 'Long'"
+                            [class.short]="boughtAktie.hebelType === 'Short'">
+                            {{ boughtAktie.hebelType }}
+                        </span>
+                    </mat-list-item>
+                </mat-list>
             </mat-card-content>
         </mat-card>
     }
-
-    <mat-card class="bought-card" appearance="outlined">
-        <mat-card-header>
-            <mat-card-title>Meine Position</mat-card-title>
-            <mat-card-subtitle>Kauf #{{ boughtAktie.id }} · {{ boughtAktie.aktieId }}</mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content>
-            <mat-list>
-                <mat-list-item>
-                    <mat-icon matListItemIcon>payments</mat-icon>
-                    <span matListItemTitle>Kaufpreis</span>
-                    <span matListItemLine>{{ boughtAktie.kaufPreis | number:'1.2-2' }} €</span>
-                </mat-list-item>
-
-                <mat-divider></mat-divider>
-
-                <mat-list-item>
-                    <mat-icon matListItemIcon>inventory_2</mat-icon>
-                    <span matListItemTitle>Anzahl</span>
-                    <span matListItemLine>{{ boughtAktie.anzahl }} Stück</span>
-                </mat-list-item>
-
-                <mat-divider></mat-divider>
-
-                <mat-list-item>
-                    <mat-icon matListItemIcon>speed</mat-icon>
-                    <span matListItemTitle>Hebel</span>
-                    <span matListItemLine>{{ boughtAktie.hebel }}x</span>
-                </mat-list-item>
-
-                <mat-divider></mat-divider>
-
-                <mat-list-item>
-                    <mat-icon matListItemIcon>swap_vert</mat-icon>
-                    <span matListItemTitle>Hebel-Typ</span>
-                    <span matListItemLine class="hebel-typ" [class.long]="boughtAktie.hebelType === 'Long'"
-                        [class.short]="boughtAktie.hebelType === 'Short'">
-                        {{ boughtAktie.hebelType }}
-                    </span>
-                </mat-list-item>
-            </mat-list>
-        </mat-card-content>
-    </mat-card>
 </div>
