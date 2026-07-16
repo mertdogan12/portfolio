@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Aktie } from './aktie';
 import { BoughtAktie } from './bought-aktie';
+import { HebelType } from './hebel-type';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -113,5 +114,22 @@ export class AktienService {
 
   kaufenAktie(boughtAktie: Omit<BoughtAktie, 'id'>): Observable<BoughtAktie> {
     return this.http.post<BoughtAktie>("/bought", boughtAktie);
+  }
+
+  /**
+   * Gewinn/Verlust einer gehebelten Position in €.
+   * Der Hebel wirkt bereits über die Positionsgröße (anzahl = investiert * hebel / kaufPreis),
+   * daher skaliert die Kursbewegung direkt auf die volle Positionsgröße.
+   */
+  berechneGewinn(boughtAktie: BoughtAktie, aktuellerKurs: number): number {
+    const kursDiff = (aktuellerKurs - boughtAktie.kaufPreis) * boughtAktie.anzahl;
+    return boughtAktie.hebelType === HebelType.Short ? -kursDiff : kursDiff;
+  }
+
+  /** Gewinn/Verlust im Verhältnis zum eingesetzten Kapital (Margin), in %. */
+  berechneGewinnProzent(boughtAktie: BoughtAktie, aktuellerKurs: number): number {
+    return boughtAktie.investiert
+      ? (this.berechneGewinn(boughtAktie, aktuellerKurs) / boughtAktie.investiert) * 100
+      : 0;
   }
 }

@@ -23,14 +23,14 @@ export class Home {
 
     this.boughtAktien$.subscribe(boughtAktien => {
       for (const bought of boughtAktien) {
-        this.totalInvested += bought.kaufPreis * bought.anzahl;
+        this.totalInvested += bought.investiert;
       }
 
       this.totalValue$ = boughtAktien.length
         ? forkJoin(
             boughtAktien.map(bought =>
               this.aktienService.quoteAktie(bought.aktieId).pipe(
-                map(aktie => aktie.aktuellerKurs * bought.anzahl)
+                map(aktie => bought.investiert + this.aktienService.berechneGewinn(bought, aktie.aktuellerKurs))
               )
             )
           ).pipe(map(werte => werte.reduce((summe, wert) => summe + wert, 0)))

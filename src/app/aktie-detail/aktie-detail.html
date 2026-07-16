@@ -1,32 +1,30 @@
 <div class="page aktie-detail">
-    @if (aktie$ | async; as aktie) {
-        @if (aktie | async; as ak) {
-            <mat-card class="aktie-card" appearance="outlined">
-                <mat-card-header>
-                    <mat-card-title>{{ ak.name }}</mat-card-title>
-                    <mat-card-subtitle>{{ ak.id }}</mat-card-subtitle>
-                </mat-card-header>
+    @if (aktie$ | async; as ak) {
+        <mat-card class="aktie-card" appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>{{ ak.name }}</mat-card-title>
+                <mat-card-subtitle>{{ ak.id }}</mat-card-subtitle>
+            </mat-card-header>
 
-                <mat-card-content>
-                    <div class="kurs-zeile">
-                        <span class="kurs">{{ ak.aktuellerKurs | number:'1.2-2' }} €</span>
-                        <span class="aenderung" [class.positiv]="ak.aenderung >= 0" [class.negativ]="ak.aenderung < 0">
-                            <mat-icon>{{ ak.aenderung >= 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
-                            {{ ak.aenderung | number:'1.2-2' }} %
-                        </span>
-                    </div>
+            <mat-card-content>
+                <div class="kurs-zeile">
+                    <span class="kurs">{{ ak.aktuellerKurs | number:'1.2-2' }} €</span>
+                    <span class="aenderung" [class.positiv]="ak.aenderung >= 0" [class.negativ]="ak.aenderung < 0">
+                        <mat-icon>{{ ak.aenderung >= 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
+                        {{ ak.aenderung | number:'1.2-2' }} %
+                    </span>
+                </div>
 
-                    <p class="beschreibung">{{ ak.beschreibung }}</p>
-                </mat-card-content>
-            </mat-card>
-        }
+                <p class="beschreibung">{{ ak.beschreibung }}</p>
+            </mat-card-content>
+        </mat-card>
     }
 
-    @if (boughtAktie$ | async; as boughtAktie) {
+    @if (position$ | async; as pos) {
         <mat-card class="bought-card" appearance="outlined">
             <mat-card-header>
                 <mat-card-title>Meine Position</mat-card-title>
-                <mat-card-subtitle>Kauf #{{ boughtAktie.id }} · {{ boughtAktie.aktieId }}</mat-card-subtitle>
+                <mat-card-subtitle>Kauf #{{ pos.boughtAktie.id }} · {{ pos.boughtAktie.aktieId }}</mat-card-subtitle>
             </mat-card-header>
 
             <mat-card-content>
@@ -34,7 +32,7 @@
                     <mat-list-item>
                         <mat-icon matListItemIcon>payments</mat-icon>
                         <span matListItemTitle>Kaufpreis</span>
-                        <span matListItemLine>{{ boughtAktie.kaufPreis | number:'1.2-2' }} €</span>
+                        <span matListItemLine>{{ pos.boughtAktie.kaufPreis | number:'1.2-2' }} €</span>
                     </mat-list-item>
 
                     <mat-divider></mat-divider>
@@ -42,7 +40,7 @@
                     <mat-list-item>
                         <mat-icon matListItemIcon>inventory_2</mat-icon>
                         <span matListItemTitle>Anzahl</span>
-                        <span matListItemLine>{{ boughtAktie.anzahl }} Stück</span>
+                        <span matListItemLine>{{ pos.boughtAktie.anzahl | number:'1.2-4' }} Stück</span>
                     </mat-list-item>
 
                     <mat-divider></mat-divider>
@@ -50,7 +48,7 @@
                     <mat-list-item>
                         <mat-icon matListItemIcon>speed</mat-icon>
                         <span matListItemTitle>Hebel</span>
-                        <span matListItemLine>{{ boughtAktie.hebel }}x</span>
+                        <span matListItemLine>{{ pos.boughtAktie.hebel }}x</span>
                     </mat-list-item>
 
                     <mat-divider></mat-divider>
@@ -58,9 +56,29 @@
                     <mat-list-item>
                         <mat-icon matListItemIcon>swap_vert</mat-icon>
                         <span matListItemTitle>Hebel-Typ</span>
-                        <span matListItemLine class="hebel-typ" [class.long]="boughtAktie.hebelType === 'Long'"
-                            [class.short]="boughtAktie.hebelType === 'Short'">
-                            {{ boughtAktie.hebelType }}
+                        <span matListItemLine class="hebel-typ" [class.long]="pos.boughtAktie.hebelType === 'Long'"
+                            [class.short]="pos.boughtAktie.hebelType === 'Short'">
+                            {{ pos.boughtAktie.hebelType }}
+                        </span>
+                    </mat-list-item>
+
+                    <mat-divider></mat-divider>
+
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>account_balance_wallet</mat-icon>
+                        <span matListItemTitle>Investiert</span>
+                        <span matListItemLine>{{ pos.boughtAktie.investiert | number:'1.2-2' }} €</span>
+                    </mat-list-item>
+
+                    <mat-divider></mat-divider>
+
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>trending_up</mat-icon>
+                        <span matListItemTitle>Gewinn/Verlust</span>
+                        <span matListItemLine class="aenderung" [class.positiv]="gewinn(pos) >= 0"
+                            [class.negativ]="gewinn(pos) < 0">
+                            {{ gewinn(pos) >= 0 ? '+' : '' }}{{ gewinn(pos) | number:'1.2-2' }} €
+                            ({{ gewinnProzent(pos) >= 0 ? '+' : '' }}{{ gewinnProzent(pos) | number:'1.2-2' }} %)
                         </span>
                     </mat-list-item>
                 </mat-list>

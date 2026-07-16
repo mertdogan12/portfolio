@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { DecimalPipe, AsyncPipe } from '@angular/common';
 import { Aktie } from '../aktie';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -40,13 +40,11 @@ export class AktieKaufen {
   aktien: Aktie[] = [];
   currentAktie$ = new BehaviorSubject<Aktie | null>(null);
   hebelTypes: HebelType[] = Object.values(HebelType);
-  hebel: HebelType = HebelType.Long;
 
   kaufenForm = new FormGroup({
-    aktie: new FormControl<Aktie | null>(null),
-    anzahl: new FormControl(1),
-    hebel: new FormControl(0),
-    hebel_type: new FormControl<string[]>(Object.values(HebelType)),
+    investiert: new FormControl(100, [Validators.required, Validators.min(1)]),
+    hebel: new FormControl(1, [Validators.required, Validators.min(1)]),
+    hebelType: new FormControl<HebelType>(HebelType.Long, { nonNullable: true }),
   });
 
   search(aktie: string) {
@@ -66,18 +64,25 @@ export class AktieKaufen {
     const value = this.kaufenForm.value;
     const currentAktie = this.currentAktie$.value;
 
-    if (currentAktie && value.hebel !== null && value.hebel_type) {
-      const boughtAktie = {
-        kaufPreis: currentAktie.aktuellerKurs,
-        anzahl: value.anzahl || 0,
-        hebel: value.hebel || 0,
-        hebelType: this.hebel,
-        aktieId: currentAktie.id,
-      };
+    if (!currentAktie || !value.investiert || !value.hebel || !value.hebelType)
+      return;
 
-      this.aktienService.kaufenAktie(boughtAktie).subscribe(() =>
-        this.router.navigate(['/home'])
-      );
-    }
+    const investiert = value.investiert;
+    const hebel = value.hebel;
+    // Wie bei echten Brokern: Hebel vergrößert die Positionsgröße, nicht das eingesetzte Kapital.
+    const anzahl = (investiert * hebel) / currentAktie.aktuellerKurs;
+
+    const boughtAktie = {
+      kaufPreis: currentAktie.aktuellerKurs,
+      anzahl,
+      hebel,
+      hebelType: value.hebelType,
+      aktieId: currentAktie.id,
+      investiert,
+    };
+
+    this.aktienService.kaufenAktie(boughtAktie).subscribe(() =>
+      this.router.navigate(['/home'])
+    );
   }
 }

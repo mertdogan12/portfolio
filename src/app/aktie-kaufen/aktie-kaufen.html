@@ -45,20 +45,35 @@
             <mat-card-content>
                 <form [formGroup]="kaufenForm" class="kaufen-form">
                     <mat-form-field appearance="outline">
+                        <mat-label>Investitionsbetrag</mat-label>
+                        <input matInput type="number" min="1" formControlName="investiert">
+                        <span matTextSuffix>€</span>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
                         <mat-label>Hebel</mat-label>
-                        <input matInput type="number" formControlName="hebel">
+                        <input matInput type="number" min="1" formControlName="hebel">
+                        <span matTextSuffix>x</span>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Hebel Typ</mat-label>
-                        <mat-select formControlName="hebel_type">
+                        <mat-select formControlName="hebelType">
                             @for (item of hebelTypes; track $index) {
                                 <mat-option [value]="item">{{ item }}</mat-option>
                             }
                         </mat-select>
                     </mat-form-field>
 
-                    <button mat-raised-button color="primary" type="submit" class="kaufen-button" (click)="kaufen()">
+                    @if (kaufenForm.value.investiert && kaufenForm.value.hebel) {
+                        <p class="positionsgroesse">
+                            Positionsgröße: {{ (kaufenForm.value.investiert * kaufenForm.value.hebel / currentAktie.aktuellerKurs) | number:'1.2-4' }} Stk.
+                            ({{ (kaufenForm.value.investiert * kaufenForm.value.hebel) | number:'1.2-2' }} €)
+                        </p>
+                    }
+
+                    <button mat-raised-button color="primary" type="submit" class="kaufen-button"
+                        [disabled]="kaufenForm.invalid" (click)="kaufen()">
                         <mat-icon>shopping_cart</mat-icon>
                         Kaufen
                     </button>

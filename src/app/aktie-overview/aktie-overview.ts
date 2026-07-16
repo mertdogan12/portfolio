@@ -21,4 +21,12 @@ export class AktieOverview implements OnInit {
   ngOnInit(): void {
     this.aktie$ = this.aktienService.quoteAktie(this.boughtAktie.aktieId);
   }
+
+  gewinn(aktuellerKurs: number): number {
+    return this.aktienService.berechneGewinn(this.boughtAktie, aktuellerKurs);
+  }
+
+  gewinnProzent(aktuellerKurs: number): number {
+    return this.aktienService.berechneGewinnProzent(this.boughtAktie, aktuellerKurs);
+  }
 }

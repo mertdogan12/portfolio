@@ -7,4 +7,6 @@ export interface BoughtAktie {
     hebel: number;
     hebelType: HebelType;
     aktieId: string;
+    /** Eingesetztes Kapital (Margin) zum Kaufzeitpunkt, in €. */
+    investiert: number;
 }
