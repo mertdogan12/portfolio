@@ -16,6 +16,14 @@
     cursor: pointer;
 }
 
+.results-label {
+    padding: 12px 16px 0;
+}
+
+.result-kurs {
+    font-weight: 600;
+}
+
 .kurs-zeile {
     display: flex;
     align-items: center;

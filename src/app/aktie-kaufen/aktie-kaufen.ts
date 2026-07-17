@@ -13,7 +13,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { AktienService } from '../aktien-service';
 import { HebelType } from '../hebel-type';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-aktie-kaufen',
@@ -47,11 +48,27 @@ export class AktieKaufen {
     hebelType: new FormControl<HebelType>(HebelType.Long, { nonNullable: true }),
   });
 
-  search(aktie: string) {
-    if (!aktie || aktie.trim() === '')
-      return;
+  private searchTerm$ = new Subject<string>();
 
-    this.aktien = this.aktienService.search(aktie);
+  constructor() {
+    this.aktienService.getKaufbareAktien().subscribe(aktien => (this.aktien = aktien));
+
+    this.searchTerm$
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap(query => this.aktienService.search(query))
+      )
+      .subscribe(aktien => (this.aktien = aktien));
+  }
+
+  search(aktie: string) {
+    if (!aktie || aktie.trim() === '') {
+      this.aktienService.getKaufbareAktien().subscribe(aktien => (this.aktien = aktien));
+      return;
+    }
+
+    this.searchTerm$.next(aktie.trim());
   }
 
   selectAktie(aktie: Aktie) {

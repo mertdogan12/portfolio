@@ -9,11 +9,15 @@
 
     @if (aktien.length > 0) {
         <mat-card class="results-card" appearance="outlined">
+            <mat-card-subtitle class="results-label">Kaufbare Aktien</mat-card-subtitle>
             <mat-list>
                 @for (a of aktien; track a.id) {
                     <mat-list-item class="result-item" (click)="selectAktie(a)">
                         <mat-icon matListItemIcon>show_chart</mat-icon>
                         <span matListItemTitle>{{ a.name }}</span>
+                        @if (a.aktuellerKurs) {
+                            <span matListItemMeta class="result-kurs">{{ a.aktuellerKurs | number:'1.2-2' }} €</span>
+                        }
                     </mat-list-item>
                     <mat-divider></mat-divider>
                 }
