@@ -39,3 +39,69 @@
     padding: var(--space-4) 0;
     text-align: center;
 }
+
+.realized-summary {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: var(--space-4) 0 var(--space-2);
+    border-top: 1px solid var(--mat-sys-outline-variant);
+    margin-top: var(--space-3);
+}
+
+.realized-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.realized-value.positiv {
+    color: var(--color-positive);
+}
+
+.realized-value.negativ {
+    color: var(--color-negative);
+}
+
+.realized-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.realized-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
+}
+
+.realized-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.realized-name {
+    font-weight: 500;
+}
+
+.realized-meta {
+    font-size: 0.8rem;
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.realized-gewinn {
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.realized-gewinn.positiv {
+    color: var(--color-positive);
+}
+
+.realized-gewinn.negativ {
+    color: var(--color-negative);
+}

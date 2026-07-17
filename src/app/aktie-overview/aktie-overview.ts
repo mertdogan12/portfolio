@@ -32,11 +32,11 @@ export class AktieOverview implements OnInit {
   gewinnProzent(aktuellerKurs: number): number {
     return this.aktienService.berechneGewinnProzent(this.boughtAktie, aktuellerKurs);
   }
-  verkaufen(event: Event): void {
+  verkaufen(event: Event, aktuellerKurs: number): void {
     event.preventDefault();
     event.stopPropagation();
 
-    this.aktienService.verkaufenAktie(this.boughtAktie.id).subscribe(() =>
+    this.aktienService.verkaufenAktie(this.boughtAktie, aktuellerKurs).subscribe(() =>
       this.verkauft.emit()
     );
   }

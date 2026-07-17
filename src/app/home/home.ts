@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { AsyncPipe, DecimalPipe } from '@angular/common';
+import { AsyncPipe, DatePipe, DecimalPipe } from '@angular/common';
 import { forkJoin, map, Observable, of } from 'rxjs';
 import { AktieOverview } from '../aktie-overview/aktie-overview';
 import { AktienService } from '../aktien-service';
 import { BoughtAktie } from '../bought-aktie';
+import { RealisierteAktie } from '../realisierte-aktie';
 
 @Component({
   selector: 'app-home',
-  imports: [DecimalPipe, AsyncPipe, AktieOverview],
+  imports: [DecimalPipe, DatePipe, AsyncPipe, AktieOverview],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -18,6 +19,9 @@ export class Home {
   totalInvested = 0;
 
   totalValue$: Observable<number> = of(0);
+
+  realisierteAktien$: Observable<RealisierteAktie[]> = of([]);
+  totalRealisiert = 0;
 
   constructor() {
     this.reload();
@@ -41,6 +45,11 @@ export class Home {
             )
           ).pipe(map(werte => werte.reduce((summe, wert) => summe + wert, 0)))
         : of(0);
+    });
+
+    this.realisierteAktien$ = this.aktienService.getRealisierteAktien();
+    this.realisierteAktien$.subscribe(verkaeufe => {
+      this.totalRealisiert = verkaeufe.reduce((summe, v) => summe + v.gewinn, 0);
     });
   }
 

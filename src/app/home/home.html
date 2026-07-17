@@ -19,4 +19,33 @@
             }
         </section>
     }
+
+    @if (realisierteAktien$ | async; as verkaeufe) {
+        @if (verkaeufe.length > 0) {
+            <section class="realized-summary">
+                <span class="summary-label">Realisierte Gewinne/Verluste</span>
+                <span class="realized-value" [class.positiv]="totalRealisiert >= 0" [class.negativ]="totalRealisiert < 0">
+                    {{ totalRealisiert >= 0 ? '+' : '' }}{{ totalRealisiert | number:'1.2-2' }} €
+                </span>
+            </section>
+
+            <section class="realized-list">
+                @for (v of verkaeufe; track v.id) {
+                    <div class="realized-row">
+                        <div class="realized-main">
+                            <span class="realized-name">{{ v.aktieId }}</span>
+                            <span class="realized-meta">
+                                {{ v.kaufPreis | number:'1.2-2' }} € → {{ v.verkaufPreis | number:'1.2-2' }} €
+                                · {{ v.hebel }}x {{ v.hebelType }} · {{ v.datum | date:'dd.MM.yyyy HH:mm' }}
+                            </span>
+                        </div>
+                        <span class="realized-gewinn" [class.positiv]="v.gewinn >= 0" [class.negativ]="v.gewinn < 0">
+                            {{ v.gewinn >= 0 ? '+' : '' }}{{ v.gewinn | number:'1.2-2' }} €
+                            ({{ v.gewinnProzent >= 0 ? '+' : '' }}{{ v.gewinnProzent | number:'1.2-2' }} %)
+                        </span>
+                    </div>
+                }
+            </section>
+        }
+    }
 </div>

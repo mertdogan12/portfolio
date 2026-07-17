@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Aktie } from './aktie';
 import { BoughtAktie } from './bought-aktie';
 import { HebelType } from './hebel-type';
-import { Observable } from 'rxjs';
+import { RealisierteAktie } from './realisierte-aktie';
+import { Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -52,7 +53,26 @@ export class AktienService {
       ? (this.berechneGewinn(boughtAktie, aktuellerKurs) / boughtAktie.investiert) * 100
       : 0;
   }
-  verkaufenAktie(id: string): Observable<BoughtAktie> {
-    return this.http.delete<BoughtAktie>(`/bought/${id}`);
+  getRealisierteAktien(): Observable<RealisierteAktie[]> {
+    return this.http.get<RealisierteAktie[]>("/verkaeufe");
+  }
+
+  verkaufenAktie(boughtAktie: BoughtAktie, aktuellerKurs: number): Observable<BoughtAktie> {
+    const realisiert: Omit<RealisierteAktie, 'id'> = {
+      aktieId: boughtAktie.aktieId,
+      kaufPreis: boughtAktie.kaufPreis,
+      verkaufPreis: aktuellerKurs,
+      anzahl: boughtAktie.anzahl,
+      hebel: boughtAktie.hebel,
+      hebelType: boughtAktie.hebelType,
+      investiert: boughtAktie.investiert,
+      gewinn: this.berechneGewinn(boughtAktie, aktuellerKurs),
+      gewinnProzent: this.berechneGewinnProzent(boughtAktie, aktuellerKurs),
+      datum: new Date().toISOString(),
+    };
+
+    return this.http.post("/verkaeufe", realisiert).pipe(
+      switchMap(() => this.http.delete<BoughtAktie>(`/bought/${boughtAktie.id}`))
+    );
   }
 }

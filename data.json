@@ -8,24 +8,47 @@
       "aktieId": "TSLA",
       "investiert": 1000,
       "id": "Z4J-QY2aLh0"
-    },
+    }
+  ],
+  "verkaeufe": [
     {
-      "kaufPreis": 327.5,
-      "anzahl": 122.13740458015268,
-      "hebel": 20,
+      "aktieId": "ENR.F",
+      "kaufPreis": 142.88,
+      "verkaufPreis": 142.88,
+      "anzahl": 2.0996640537514,
+      "hebel": 1,
       "hebelType": "Long",
-      "aktieId": "AAPL",
-      "investiert": 2000,
-      "id": "kp-2Fbfiluw"
+      "investiert": 300,
+      "gewinn": 0,
+      "gewinnProzent": 0,
+      "datum": "2026-07-17T06:38:27.535Z",
+      "id": "H39AGKIrFpw"
     },
     {
+      "aktieId": "GOOGL",
       "kaufPreis": 370.92,
+      "verkaufPreis": 354.46,
       "anzahl": 53.919982745605516,
       "hebel": 20,
       "hebelType": "Long",
-      "aktieId": "GOOGL",
       "investiert": 1000,
-      "id": "TbUkN511D8E"
+      "gewinn": -887.5229159926688,
+      "gewinnProzent": -88.75229159926687,
+      "datum": "2026-07-17T06:38:42.846Z",
+      "id": "Txe_AjUEq0Y"
+    },
+    {
+      "aktieId": "AAPL",
+      "kaufPreis": 327.5,
+      "verkaufPreis": 333.26,
+      "anzahl": 122.13740458015268,
+      "hebel": 20,
+      "hebelType": "Long",
+      "investiert": 2000,
+      "gewinn": 703.5114503816783,
+      "gewinnProzent": 35.175572519083914,
+      "datum": "2026-07-17T06:39:01.822Z",
+      "id": "6GcK9Bg76FA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
